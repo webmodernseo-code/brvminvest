@@ -1,0 +1,12 @@
+/* BRVM Design System — Webfonts
+   Nike-inspired athletic condensed display + a workhorse grotesque body face.
+   No local font binaries were provided, so these are sourced live from
+   Google Fonts (closest-match substitution — see readme.md "Caveats"). */
+
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@500;600&display=swap');
+
+:root {
+  --font-display: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+  --font-body:    'Barlow', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono:    'JetBrains Mono', 'SF Mono', Menlo, monospace;
+}

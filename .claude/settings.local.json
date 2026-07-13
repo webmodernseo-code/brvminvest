@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/monep/AppData/Local/Temp/claude/C--Users-monep-OneDrive-Desktop-Tous-mes-dossiers-PROJET-WEB-BRVM/1e211a22-7fb3-4b4a-a7ee-d7986b2f5ef3/scratchpad/superpowers/**)",
+      "Read(//c/Users/monep/.claude/**)",
+      "Read(//c/Users/monep/.claude/plugins/**)",
+      "Bash(python3 -c ' *)",
+      "Bash(mkdir -p '/c/Users/monep/OneDrive/Desktop/Tous mes dossiers/PROJET WEB/BRVM/.claude/skills')",
+      "Bash(cp -r /c/Users/monep/.claude/plugins/cache/claude-plugins-official/superpowers/6.1.1/skills/* '/c/Users/monep/OneDrive/Desktop/Tous mes dossiers/PROJET WEB/BRVM/.claude/skills/')",
+      "WebSearch",
+      "WebFetch(domain:www.opensourceforu.com)",
+      "WebFetch(domain:uvik.net)",
+      "WebFetch(domain:supabase.com)"
+    ]
+  }
+}

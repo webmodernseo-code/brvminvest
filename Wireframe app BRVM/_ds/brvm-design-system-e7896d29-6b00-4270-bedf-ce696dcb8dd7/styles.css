@@ -1,0 +1,15 @@
+@import url('./tokens/fonts.css');
+@import url('./tokens/colors.css');
+@import url('./tokens/typography.css');
+@import url('./tokens/spacing.css');
+@import url('./tokens/radii.css');
+
+* { box-sizing: border-box; }
+body {
+  background: var(--surface-app);
+  color: var(--text-primary);
+  font: var(--text-body);
+  margin: 0;
+}
+a { color: var(--text-link); }
+a:hover { color: var(--text-link-hover); }

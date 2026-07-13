@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="#111"/><text x="100" y="112" font-size="44" font-weight="800" fill="#fff" text-anchor="middle" font-family="sans-serif">BRVM</text></svg></template>
+<x-dc>
+
+<helmet data-dc-atomics>
+<meta name="design_doc_mode" content="canvas">
+<link rel="stylesheet" href="_ds/brvm-design-system-e7896d29-6b00-4270-bedf-ce696dcb8dd7/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/brvm-design-system-e7896d29-6b00-4270-bedf-ce696dcb8dd7/tokens/colors.css">
+<link rel="stylesheet" href="_ds/brvm-design-system-e7896d29-6b00-4270-bedf-ce696dcb8dd7/tokens/typography.css">
+<link rel="stylesheet" href="_ds/brvm-design-system-e7896d29-6b00-4270-bedf-ce696dcb8dd7/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/brvm-design-system-e7896d29-6b00-4270-bedf-ce696dcb8dd7/tokens/radii.css">
+<link rel="stylesheet" href="_ds/brvm-design-system-e7896d29-6b00-4270-bedf-ce696dcb8dd7/styles.css">
+<script src="_ds/brvm-design-system-e7896d29-6b00-4270-bedf-ce696dcb8dd7/_ds_bundle.js"></script>
+<script src="./icon-patch.js"></script>
+<style>
+  body{margin:0;background:#f0eee9;font-family:var(--font-body,system-ui,sans-serif)}
+  .dv-turn{padding:40px 44px 60px;scroll-margin-top:16px}
+  .dv-thd{display:flex;align-items:baseline;gap:10px;margin:0 0 22px}
+  .dv-tid{font:600 10px ui-monospace,Menlo,monospace;padding:3px 7px;background:#1a1a1a;color:#fff;border-radius:4px;text-decoration:none}
+  .dv-tname{font:600 13px/1.2 system-ui,sans-serif;color:#1a1a1a}
+  .dv-opts{display:flex;flex-wrap:wrap;gap:32px;align-items:flex-start}
+  .dv-opt{flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px}
+  .dv-oid{font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none}
+  .dv-olabel{display:flex;align-items:baseline;gap:8px;font:400 11px/1.3 system-ui,sans-serif;color:rgba(0,0,0,.55)}
+  .dv-card{background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.06);overflow:hidden}
+  .dv-next{margin:22px 0 0;font:12px/1.5 system-ui,sans-serif;color:rgba(0,0,0,.5)}
+  .phone{width:375px;height:812px;border-radius:44px;background:#000;padding:12px;box-shadow:0 20px 50px rgba(0,0,0,.25)}
+  .phone-screen{width:100%;height:100%;border-radius:34px;overflow:hidden;background:var(--surface-app);display:flex;flex-direction:column;position:relative}
+  .status{height:44px;flex-shrink:0;display:flex;align-items:center;justify-content:space-between;padding:0 24px;font:600 13px var(--font-body,sans-serif);color:var(--text-primary)}
+</style>
+</helmet>
+
+<section class="dv-turn" id="t1">
+  <div class="dv-thd"><a class="dv-tid" href="#t1">1</a><span class="dv-tname">Investir à la BRVM — 3 modules (Dashboard · DiviAlerte · Gestia)</span></div>
+  <div class="dv-opts">
+
+    <div class="dv-opt" id="1a">
+      <div class="dv-olabel"><a class="dv-oid" href="#1a">1a</a>Dashboard — accueil (mobile)</div>
+      <div class="dv-card">
+        <div class="phone"><div class="phone-screen">
+          <div class="status"><span>9:41</span><span>●●●</span></div>
+          <div style="padding:8px 20px 12px;flex-shrink:0;">
+            <div style="font:800 15px/1 var(--font-display);letter-spacing:0.06em;text-transform:uppercase;color:var(--text-tertiary);">BRVM</div>
+            <div style="font:800 30px/1.02 var(--font-display);letter-spacing:-0.01em;text-transform:uppercase;color:var(--text-primary);margin-top:6px;">Bonjour, Awa</div>
+            <div style="font:15px/1.5 var(--font-body);color:var(--text-secondary);margin-top:2px;">Composite <span style="font:600 15px var(--font-mono);color:var(--market-up-500);">+1.8%</span> aujourd'hui</div>
+          </div>
+          <div style="flex:1;overflow-y:auto;padding:4px 20px 24px;display:flex;flex-direction:column;gap:14px;">
+
+            <x-import component-from-global-scope="BRVMDesignSystem_e7896d.Card" hint-size="100%,120px">
+              <div style="display:flex;align-items:center;gap:14px;">
+                <div style="width:48px;height:48px;border-radius:var(--radius-m);background:var(--market-up-tint);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                  <x-import component-from-global-scope="BRVMDesignSystem_e7896d.Icon" name="telescope" size="{{ 22 }}" color="var(--market-up-700)" hint-size="22px,22px"></x-import>
+                </div>
+                <div style="flex:1;min-width:0;">
+                  <div style="font:var(--text-title);color:var(--text-primary);">Veille.BRVM</div>
+                  <div style="font:var(--text-body-s);color:var(--text-tertiary);margin-top:2px;">2 articles · 2 vidéos cette semaine</div>
+                </div>
+                <x-import component-from-global-scope="BRVMDesignSystem_e7896d.Icon" name="chevron-right" size="{{ 18 }}" color="var(--text-tertiary)" hint-size="18px,18px"></x-import>
+              </div>
+            </x-import>
+
+            <x-import component-from-global-scope="BRVMDesignSystem_e7896d.Card" hint-size="100%,120px">
+              <div style="display:flex;align-items:center;gap:14px;">
+                <div style="width:48px;height:48px;border-radius:var(--radius-m);background:var(--alert-tint);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                  <x-import component-from-global-scope="BRVMDesignSystem_e7896d.Icon" name="bell" size="{{ 22 }}" color="var(--alert-700)" hint-size="22px,22px"></x-import>
+                </div>
+                <div style="flex:1;min-width:0;">
+                  <div style="display:flex;align-items:center;gap:8px;">
+                    <div style="font:var(--text-title);color:var(--text-primary);">DiviAlerte</div>
+                    <x-import component-from-global-scope="BRVMDesignSystem_e7896d.Badge" tone="warning" hint-size="auto,20px">J-3</x-import>
+                  </div>
+                  <div style="font:var(--text-body-s);color:var(--text-tertiary);margin-top:2px;">SNTS verse un dividende bientôt</div>
+                </div>
+                <x-import component-from-global-scope="BRVMDesignSystem_e7896d.Icon" name="chevron-right" size="{{ 18 }}" color="var(--text-tertiary)" hint-size="18px,18px"></x-import>
+              </div>
+            </x-import>
+
+            <x-import component-from-global-scope="BRVMDesignSystem_e7896d.Card" hint-size="100%,120px">
+              <div style="display:flex;align-items:center;gap:14px;">
+                <div style="width:48px;height:48px;border-radius:var(--radius-m);background:var(--info-tint);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                  <x-import component-from-global-scope="BRVMDesignSystem_e7896d.Icon" name="lock" size="{{ 22 }}" color="var(--info-700)" hint-size="22px,22px"></x-import>
+                </div>
+                <div style="flex:1;min-width:0;">
+                  <div style="font:var(--text-title);color:var(--text-primary);">Gestia.BRVM</div>
+                  <div style="font:var(--text-body-s);color:var(--text-tertiary);margin-top:2px;">Portefeuille · 4 820 000 XOF</div>
+                </div>
+                <x-import component-from-global-scope="BRVMDesignSystem_e7896d.Icon" name="chevron-right" size="{{ 18 }}" color="var(--text-tertiary)" hint-size="18px,18px"></x-import>
+              </div>
+            </x-import>
+
+            <div style="font:var(--text-label);letter-spacing:var(--tracking-label);text-transform:uppercase;color:var(--text-tertiary);margin-top:4px;">Marché aujourd'hui</div>
+            <div style="display:flex;gap:10px;overflow-x:auto;">
+              <div style="min-width:104px;background:var(--surface-card);border:1px solid var(--border-subtle);border-radius:var(--radius-m);padding:12px;flex-shrink:0;">
+                <div style="font:var(--text-label);color:var(--text-primary);">SNTS</div>
+                <div style="font:var(--text-mono);color:var(--market-up-500);margin-top:6px;">+4.2%</div>
+              </div>
+              <div style="min-width:104px;background:var(--surface-card);border:1px solid var(--border-subtle);border-radius:var(--radius-m);padding:12px;flex-shrink:0;">
+                <div style="font:var(--text-label);color:var(--text-primary);">BOAB</div>
+                <div style="font:var(--text-mono);color:var(--market-down-500);margin-top:6px;">-1.1%</div>
+              </div>
+              <div style="min-width:104px;background:var(--surface-card);border:1px solid var(--border-subtle);border-radius:var(--radius-m);padding:12px;flex-shrink:0;">
+                <div style="font:var(--text-label);color:var(--text-primary);">ORGT</div>
+                <div style="font:var(--text-mono);color:var(--market-up-500);margin-top:6px;">+2.6%</div>
+              </div>
+            </div>
+          </div>
+
+          <div style="height:64px;flex-shrink:0;display:flex;justify-content:space-around;align-items:center;border-top:1px solid var(--border-subtle);background:var(--surface-canvas);">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--action-primary);">
+              <x-import component-from-global-scope="BRVMDesignSystem_e7896d.Icon" name="home" size="{{ 20 }}" color="var(--action-primary)" hint-size="20px,20px"></x-import>
+              <span style="font:var(--text-caption);">Accueil</span>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--text-tertiary);">
+              <x-import component-from-global-scope="BRVMDesignSystem_e7896d.Icon" name="bell" size="{{ 20 }}" color="var(--text-tertiary)" hint-size="20px,20px"></x-import>
+              <span style="font:var(--text-caption);">DiviAlerte</span>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--text-tertiary);">
+              <x-import component-from-global-scope="BRVMDesignSystem_e7896d.Icon" name="briefcase" size="{{ 20 }}" color="var(--text-tertiary)" hint-size="20px,20px"></x-import>
+              <span style="font:var(--text-caption);">Gestia</span>
+            </div>
+          </div>
+        </div></div>
+      </div>
+    </div>
+
+    <div class="dv-opt" id="1b">
+      <div class="dv-olabel"><a class="dv-oid" href="#1b">1b</a>DiviAlerte — tableau des dividendes (mobile)</div>
+      <div class="dv-card">
+        <div class="phone"><div class="phone-screen">
+          <div class="status"><span>9:41</span><span>●●●</span></div>
+          <div style="padding:14px 20px 10px;flex-shrink:0;">
+            <div style="font:800 24px/1.05 var(--font-display);letter-spacing:-0.01em;text-transform:uppercase;color:var(--text-primary);">DiviAlerte</div>
+          </div>
+          <div style="flex:1;overflow-y:auto;padding:4px 20px 20px;display:flex;flex-direction:column;gap:14px;">
+            <div style="display:flex;align-items:center;gap:10px;background:var(--surface-card);border:1px solid var(--border-default);border-radius:var(--radius-m);padding:10px 14px;">
+              <x-import component-from-global-scope="BRVMDesignSystem_e7896d.Icon" name="search" size="{{ 17 }}" color="var(--text-tertiary)" hint-size="17px,17px"></x-import>
+              <span style="font:var(--text-body-s);color:var(--text-tertiary);">Rechercher une entreprise</span>
+            </div>
+            <div style="display:flex;gap:8px;overflow-x:auto;">
+              <x-import component-from-global-scope="BRVMDesignSystem_e7896d.Tag" active="{{ true }}" hint-size="auto,32px">Tous</x-import>
+              <x-import component-from-global-scope="BRVMDesignSystem_e7896d.Tag" hint-size="auto,32px">Banque</x-import>
+              <x-import component-from-global-scope="BRVMDesignSystem_e7896d.Tag" hint-size="auto,32px">Télécoms</x-import>
+              <x-import component-from-global-scope="BRVMDesignSystem_e7896d.Tag" hint-size="auto,32px">Énergie</x-import>
+            </div>
+
+            <div style="display:flex;flex-direction:column;gap:10px;">
+              <x-import component-from-global-scope="BRVMDesignSystem_e7896d.Card" hint-size="100%,84px">
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                  <div>
+                    <div style="font:var(--text-title);color:var(--text-primary);">SNTS · Sonatel</div>
+                    <div style="font:var(--text-body-s);color:var(--text-tertiary);margin-top:4px;">Rendement <span style="font:var(--text-mono);color:var(--text-primary);">8.5%</span> · verse le 22 juil.</div>
+                  </div>
+                  <x-import component-from-global-scope="BRVMDesignSystem_e7896d.Badge" tone="error" hint-size="auto,20px">Urgent · J-3</x-import>
+                </div>
+              </x-import>
+              <x-import component-from-global-scope="BRVMDesignSystem_e7896d.Card" hint-size="100%,84px">
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                  <div>
+                    <div style="font:var(--text-title);color:var(--text-primary);">SGBC · SGB Côte d'Ivoire</div>
+                    <div style="font:var(--text-body-s);color:var(--text-tertiary);margin-top:4px;">Rendement <span style="font:var(--text-mono);color:var(--text-primary);">6.1%</span> · verse le 4 août</div>
+                  </div>
+                  <x-import component-from-global-scope="BRVMDesignSystem_e7896d.Badge" tone="warning" hint-size="auto,20px">J-16</x-import>
+                </div>
+              </x-import>
+              <x-import component-from-global-scope="BRVMDesignSystem_e7896d.Card" hint-size="100%,84px">
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                  <div>
+                    <div style="font:var(--text-title);color:var(--text-primary);">ORGT · Orange CI</div>
+                    <div style="font:var(--text-body-s);color:var(--text-tertiary);margin-top:4px;">Rendement <span style="font:var(--text-mono);color:var(--text-primary);">5.4%</span> · verse le 30 août</div>
+                  </div>
+                  <x-import component-from-global-scope="BRVMDesignSystem_e7896d.Badge" tone="neutral" hint-size="auto,20px">J-42</x-import>
+                </div>
+              </x-import>
+              <x-import component-from-global-scope="BRVMDesignSystem_e7896d.Card" hint-size="100%,116px">
+                <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+                  <div>
+                    <div style="font:var(--text-title);color:var(--text-primary);">BOAB · Bank of Africa</div>
+                    <div style="font:var(--text-body-s);color:var(--text-tertiary);margin-top:4px;">Rendement <span style="font:var(--text-mono);color:var(--text-primary);">7.2%</span> · verse le 10 sept.</div>
+                    <div style="margin-top:10px;">
+                      <x-import component-from-global-scope="BRVMDesignSystem_e7896d.Button" variant="outline" size="s" hint-size="auto,36px">Activer une alerte WhatsApp</x-import>
+                    </div>
+                  </div>
+                  <x-import component-from-global-scope="BRVMDesignSystem_e7896d.Badge" tone="neutral" hint-size="auto,20px">J-53</x-import>
+                </div>
+              </x-import>
+            </div>
+          </div>
+          <div style="height:64px;flex-shrink:0;border-top:1px solid var(--border-subtle);background:var(--surface-canvas);"></div>
+        </div></div>
+      </div>
+    </div>
+
+    <div class="dv-opt" id="1c">
+      <div class="dv-olabel"><a class="dv-oid" href="#1c">1c</a>Gestia.BRVM — connexion (coffre-fort)</div>
+      <div class="dv-card">
+        <div class="phone"><div class="phone-screen">
+          <div class="status"><span>9:41</span><span>●●●</span></div>
+          <div style="flex:1;display:flex;flex-direction:column;justify-content:center;padding:32px 28px;background:var(--surface-app);">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:18px;margin-bottom:40px;">
+              <div style="width:64px;height:64px;border-radius:var(--radius-l);background:var(--info-tint);display:flex;align-items:center;justify-content:center;">
+                <x-import component-from-global-scope="BRVMDesignSystem_e7896d.Icon" name="shield-check" size="{{ 30 }}" color="var(--info-700)" hint-size="30px,30px"></x-import>
+              </div>
+              <div style="text-align:center;">
+                <div style="font:800 26px/1.05 var(--font-display);letter-spacing:-0.01em;text-transform:uppercase;color:var(--text-primary);">Gestia.BRVM</div>
+                <div style="font:var(--text-body);color:var(--text-secondary);margin-top:8px;">Votre coffre-fort de portefeuille</div>
+              </div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:14px;">
+              <x-import component-from-global-scope="BRVMDesignSystem_e7896d.Input" label="Adresse email" placeholder="vous@exemple.com" hint-size="100%,64px"></x-import>
+              <x-import component-from-global-scope="BRVMDesignSystem_e7896d.Input" label="Mot de passe" type="password" placeholder="••••••••" hint-size="100%,64px"></x-import>
+              <x-import component-from-global-scope="BRVMDesignSystem_e7896d.Button" variant="primary" size="l" fullWidth="{{ true }}" hint-size="100%,52px">Déverrouiller</x-import>
+              <div style="text-align:center;font:var(--text-body-s);color:var(--text-tertiary);margin-top:4px;">Protégé par authentification Supabase</div>
+            </div>
+          </div>
+        </div></div>
+      </div>
+    </div>
+
+    <div class="dv-opt" id="1d">
+      <div class="dv-olabel"><a class="dv-oid" href="#1d">1d</a>Gestia.BRVM — portefeuille &amp; frais (mobile)</div>
+      <div class="dv-card">
+        <div class="phone"><div class="phone-screen">
+          <div class="status"><span>9:41</span><span>●●●</span></div>
+          <div style="padding:14px 20px 10px;flex-shrink:0;">
+            <div style="font:800 24px/1.05 var(--font-display);letter-spacing:-0.01em;text-transform:uppercase;color:var(--text-primary);">Gestia.BRVM</div>
+          </div>
+          <div style="flex:1;overflow-y:auto;padding:4px 20px 20px;display:flex;flex-direction:column;gap:16px;">
+
+            <x-import component-from-global-scope="BRVMDesignSystem_e7896d.Card" hint-size="100%,110px">
+              <div style="font:var(--text-label);letter-spacing:var(--tracking-label);text-transform:uppercase;color:var(--text-tertiary);">Ajouter un achat</div>
+              <div style="display:flex;flex-direction:column;gap:10px;margin-top:12px;">
+                <label style="display:flex;flex-direction:column;gap:6px;">
+                  <span style="font:var(--text-label);letter-spacing:var(--tracking-label);text-transform:uppercase;color:var(--text-tertiary);">Entreprise</span>
+                  <div style="position:relative;">
+                    <select style="font:var(--text-body);padding:12px 40px 12px 14px;border-radius:var(--radius-m);background:var(--surface-card);border:1px solid var(--border-default);color:var(--text-primary);appearance:none;width:100%;">
+                      <option>SNTS — Sonatel</option>
+                      <option>BOAB — Bank of Africa</option>
+                      <option>ORGT — Orange CI</option>
+                      <option>SGBC — SGB Côte d'Ivoire</option>
+                    </select>
+                    <div style="position:absolute;right:12px;top:50%;transform:translateY(-50%);pointer-events:none;color:var(--text-tertiary);">
+                      <x-import component-from-global-scope="BRVMDesignSystem_e7896d.Icon" name="chevron-down" size="{{ 16 }}" color="var(--text-tertiary)" hint-size="16px,16px"></x-import>
+                    </div>
+                  </div>
+                </label>
+                <div style="display:flex;gap:10px;">
+                  <div style="flex:1;"><x-import component-from-global-scope="BRVMDesignSystem_e7896d.Input" label="Quantité" placeholder="120" hint-size="100%,56px"></x-import></div>
+                  <div style="flex:1;"><x-import component-from-global-scope="BRVMDesignSystem_e7896d.Input" label="Prix unitaire" placeholder="12 500" hint-size="100%,56px"></x-import></div>
+                </div>
+                <x-import component-from-global-scope="BRVMDesignSystem_e7896d.Input" label="Montant total débité" placeholder="1 517 000" hint-size="100%,56px"></x-import>
+                <x-import component-from-global-scope="BRVMDesignSystem_e7896d.Button" variant="success" fullWidth="{{ true }}" hint-size="100%,44px">Enregistrer l'achat</x-import>
+              </div>
+            </x-import>
+
+            <div style="font:var(--text-label);letter-spacing:var(--tracking-label);text-transform:uppercase;color:var(--text-tertiary);">Récapitulatif des achats</div>
+
+            <x-import component-from-global-scope="BRVMDesignSystem_e7896d.Card" hint-size="100%,150px">
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <div>
+                  <div style="font:var(--text-title);color:var(--text-primary);">SNTS · 120 actions</div>
+                  <div style="font:var(--text-body-s);color:var(--text-tertiary);margin-top:4px;">Débité 1 517 000 XOF</div>
+                </div>
+                <x-import component-from-global-scope="BRVMDesignSystem_e7896d.Badge" tone="error" hint-size="auto,20px">Frais : 1.32%</x-import>
+              </div>
+              <div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--border-subtle);">
+                <div style="font:var(--text-label);letter-spacing:var(--tracking-label);text-transform:uppercase;color:var(--text-tertiary);">Thèse d'investissement</div>
+                <div style="font:var(--text-body-s);color:var(--text-secondary);margin-top:6px;">Leader télécoms, dividende stable, horizon 3 ans.</div>
+              </div>
+            </x-import>
+
+            <x-import component-from-global-scope="BRVMDesignSystem_e7896d.Card" hint-size="100%,90px">
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <div>
+                  <div style="font:var(--text-title);color:var(--text-primary);">BOAB · 300 actions</div>
+                  <div style="font:var(--text-body-s);color:var(--text-tertiary);margin-top:4px;">Débité 1 848 000 XOF</div>
+                </div>
+                <x-import component-from-global-scope="BRVMDesignSystem_e7896d.Badge" tone="success" hint-size="auto,20px">Frais : 0.98%</x-import>
+              </div>
+            </x-import>
+          </div>
+        </div></div>
+      </div>
+    </div>
+
+    <div class="dv-opt" id="1e">
+      <div class="dv-olabel"><a class="dv-oid" href="#1e">1e</a>Dashboard — version web (desktop)</div>
+      <div class="dv-card" style="width:960px;">
+        <div style="background:var(--surface-app);height:640px;display:flex;flex-direction:column;">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:20px 32px;border-bottom:1px solid var(--border-subtle);flex-shrink:0;">
+            <div style="font:800 20px/1 var(--font-display);letter-spacing:-0.01em;text-transform:uppercase;color:var(--text-primary);">BRVM</div>
+            <div style="display:flex;gap:28px;">
+              <span style="font:var(--text-body-s);color:var(--text-primary);">Accueil</span>
+              <span style="font:var(--text-body-s);color:var(--text-tertiary);">DiviAlerte</span>
+              <span style="font:var(--text-body-s);color:var(--text-tertiary);">Gestia</span>
+            </div>
+            <div style="width:40px;height:40px;border-radius:var(--radius-m);border:1px solid var(--border-default);display:flex;align-items:center;justify-content:center;">
+              <x-import component-from-global-scope="BRVMDesignSystem_e7896d.Icon" name="bell" size="{{ 18 }}" color="var(--text-primary)" hint-size="18px,18px"></x-import>
+            </div>
+          </div>
+          <div style="flex:1;overflow:hidden;padding:32px;display:flex;flex-direction:column;gap:20px;">
+            <div>
+              <div style="font:800 34px/1.05 var(--font-display);letter-spacing:-0.01em;text-transform:uppercase;color:var(--text-primary);">Bonjour, Awa</div>
+              <div style="font:var(--text-body);color:var(--text-secondary);margin-top:4px;">Composite <span style="font:600 15px var(--font-mono);color:var(--market-up-500);">+1.8%</span> · 198.42 pts</div>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;">
+              <x-import component-from-global-scope="BRVMDesignSystem_e7896d.Card" raised="{{ true }}" padding="{{ 24 }}" hint-size="100%,220px">
+                <div style="width:48px;height:48px;border-radius:var(--radius-m);background:var(--market-up-tint);display:flex;align-items:center;justify-content:center;">
+                  <x-import component-from-global-scope="BRVMDesignSystem_e7896d.Icon" name="telescope" size="{{ 24 }}" color="var(--market-up-700)" hint-size="24px,24px"></x-import>
+                </div>
+                <div style="font:var(--text-title);color:var(--text-primary);margin-top:16px;">Veille.BRVM</div>
+                <div style="font:var(--text-body-s);color:var(--text-tertiary);margin-top:6px;">Articles &amp; vidéos hebdo pour comprendre le marché.</div>
+                <div style="font:var(--text-body-s);color:var(--text-primary);margin-top:16px;">2 articles · 2 vidéos →</div>
+              </x-import>
+              <x-import component-from-global-scope="BRVMDesignSystem_e7896d.Card" raised="{{ true }}" padding="{{ 24 }}" hint-size="100%,220px">
+                <div style="width:48px;height:48px;border-radius:var(--radius-m);background:var(--alert-tint);display:flex;align-items:center;justify-content:center;">
+                  <x-import component-from-global-scope="BRVMDesignSystem_e7896d.Icon" name="bell" size="{{ 24 }}" color="var(--alert-700)" hint-size="24px,24px"></x-import>
+                </div>
+                <div style="font:var(--text-title);color:var(--text-primary);margin-top:16px;">DiviAlerte</div>
+                <div style="font:var(--text-body-s);color:var(--text-tertiary);margin-top:6px;">Suivez les rendements et recevez une alerte WhatsApp.</div>
+                <div style="margin-top:16px;"><x-import component-from-global-scope="BRVMDesignSystem_e7896d.Badge" tone="warning" hint-size="auto,20px">SNTS · J-3</x-import></div>
+              </x-import>
+              <x-import component-from-global-scope="BRVMDesignSystem_e7896d.Card" raised="{{ true }}" padding="{{ 24 }}" hint-size="100%,220px">
+                <div style="width:48px;height:48px;border-radius:var(--radius-m);background:var(--info-tint);display:flex;align-items:center;justify-content:center;">
+                  <x-import component-from-global-scope="BRVMDesignSystem_e7896d.Icon" name="lock" size="{{ 24 }}" color="var(--info-700)" hint-size="24px,24px"></x-import>
+                </div>
+                <div style="font:var(--text-title);color:var(--text-primary);margin-top:16px;">Gestia.BRVM</div>
+                <div style="font:var(--text-body-s);color:var(--text-tertiary);margin-top:6px;">Portefeuille, frais réels et thèses d'investissement.</div>
+                <div style="font:var(--text-mono-l);color:var(--text-primary);margin-top:16px;">4 820 000 XOF</div>
+              </x-import>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <p class="dv-next">Essaie ensuite : "ajoute la vue détail d'une action à <a class="dv-oid" href="#1a">1a</a>" · "version desktop pour <a class="dv-oid" href="#1b">1b</a> et <a class="dv-oid" href="#1d">1d</a>" · "rends <a class="dv-oid" href="#1c">1c</a> interactif"</p>
+</section>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">class Component extends DCLogic {
+  renderVals() {
+    return {
+      tickerOptions: [
+        { value: 'SNTS', label: 'SNTS — Sonatel' },
+        { value: 'BOAB', label: 'BOAB — Bank of Africa' },
+        { value: 'ORGT', label: 'ORGT — Orange CI' },
+        { value: 'SGBC', label: "SGBC — SGB Côte d'Ivoire" },
+      ],
+    };
+  }
+}</script>
+</body>
+</html>
