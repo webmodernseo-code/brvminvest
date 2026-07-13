@@ -26,6 +26,7 @@ export function Button({
   size = "l",
   fullWidth = false,
   className = "",
+  type = "button",
   ...props
 }: ButtonProps) {
   return (
@@ -37,6 +38,7 @@ export function Button({
         fullWidth ? "w-full" : "",
         className,
       ].join(" ")}
+      type={type}
       {...props}
     />
   );
