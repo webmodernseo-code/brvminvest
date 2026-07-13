@@ -1,0 +1,94 @@
+/* BRVM Design System — Color tokens
+   Palette family: Nike-inspired monochrome (true black / true white) is the
+   PRIMARY system — buttons, nav, focus, links all stay black/white. Color
+   (orange/blue/green/amber) is reserved for functional/feature meaning only
+   (market gains/losses, alerts, category tags) and never used as "the brand
+   color" for actions — exactly like nike.com, which is monochrome with
+   color popping up only for specific product/feature callouts. */
+
+:root {
+  /* ---- Base neutrals (true black/white anchor, warm-neutral grays) ---- */
+  --gray-0:  #ffffff;
+  --gray-25: #f7f7f5;
+  --gray-50: #efefec;
+  --gray-100:#e2e2dd;
+  --gray-200:#c9c9c2;
+  --gray-300:#a8a89f;
+  --gray-400:#82827a;
+  --gray-500:#63635c;
+  --gray-600:#48483f;
+  --gray-700:#313129;
+  --gray-800:#1d1d17;
+  --gray-900:#111110;
+  --gray-950:#000000;
+
+  /* ---- Functional color: reserved strictly for alerts/warnings (amber)
+     and market gains/losses (green/red) below — the system otherwise stays
+     black/white/gray, like nike.com. No general-purpose "brand accent" hue. ---- */
+
+  /* ---- Semantic market colors ---- */
+  --market-up-500:   #17c964;
+  --market-up-700:   #0e8f47;
+  --market-up-tint:  #e3faec;
+  --market-down-500: #ef4444;
+  --market-down-700: #b91c1c;
+  --market-down-tint:#fdecec;
+  --alert-500:  #2f6b4f;
+  --alert-700:  #1f4a36;
+  --alert-tint: #e8f2ec;
+  --info-500:   #2f6fed;
+  --info-700:   #1d4bb0;
+  --info-tint:  #e8f0fe;
+
+  /* ---- Semantic aliases: surfaces (light — Nike-site-style white field) ---- */
+  --surface-app:      var(--gray-0);
+  --surface-canvas:    var(--gray-25);
+  --surface-card:      var(--gray-25);
+  --surface-card-raised: var(--gray-0);
+  --surface-inverse:   var(--gray-950);
+  --surface-overlay:   rgba(0,0,0,0.5);
+  --surface-sunken:    var(--gray-50);
+
+  /* ---- Semantic aliases: text ---- */
+  --text-primary:    var(--gray-950);
+  --text-secondary:  var(--gray-600);
+  --text-tertiary:   var(--gray-500);
+  --text-disabled:   var(--gray-300);
+  --text-inverse:    var(--gray-0);
+  --text-link:       var(--gray-950);
+  --text-link-hover: var(--gray-600);
+
+  /* ---- Semantic aliases: borders ---- */
+  --border-subtle:  rgba(0,0,0,0.08);
+  --border-default: rgba(0,0,0,0.14);
+  --border-strong:  rgba(0,0,0,0.28);
+  --border-on-light:rgba(0,0,0,0.12);
+  --border-focus:   var(--gray-950);
+
+  /* ---- Semantic aliases: brand/action (monochrome — no color in core actions) ---- */
+  --action-primary:        var(--gray-950);
+  --action-primary-hover:  var(--gray-800);
+  --action-primary-active: var(--gray-700);
+  --action-primary-text:   var(--gray-0);
+
+  --action-secondary:        var(--gray-0);
+  --action-secondary-hover:  var(--gray-50);
+  --action-secondary-active: var(--gray-100);
+  --action-secondary-text:   var(--gray-950);
+
+  --action-ghost-hover:  rgba(0,0,0,0.06);
+  --action-ghost-active: rgba(0,0,0,0.1);
+
+  --action-danger:       var(--market-down-500);
+  --action-danger-hover: #dc2626;
+
+  /* ---- Semantic states ---- */
+  --state-success-fg: var(--market-up-500);
+  --state-success-bg: rgba(23,201,100,0.12);
+  --state-error-fg:   var(--market-down-500);
+  --state-error-bg:   rgba(239,68,68,0.12);
+  --state-warning-fg: var(--alert-500);
+  --state-warning-bg: rgba(47,107,79,0.12);
+  --state-info-fg:    var(--info-500);
+  --state-info-bg:    rgba(47,111,237,0.12);
+}

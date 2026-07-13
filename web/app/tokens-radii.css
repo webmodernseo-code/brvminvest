@@ -1,0 +1,26 @@
+/* BRVM Design System — Radii & elevation
+   Motifs: hard-edged, minimal rounding (athletic/industrial), NOT bubbly.
+   Chips/pills get full rounding; cards and inputs stay tight-radius. */
+:root {
+  --radius-none: 0px;
+  --radius-s:  6px;
+  --radius-m:  10px;
+  --radius-l:  16px;
+  --radius-xl: 24px;
+  --radius-pill: 999px;
+
+  /* Elevation: dark UI, so shadows are mostly about separation, not drop-shadow drama.
+     Use a subtle outer glow + a hairline border rather than heavy blur. */
+  --shadow-none: none;
+  --shadow-s: 0 1px 2px rgba(0,0,0,0.4);
+  --shadow-m: 0 4px 16px rgba(0,0,0,0.45);
+  --shadow-l: 0 12px 32px rgba(0,0,0,0.55);
+
+  --border-width: 1px;
+
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1); /* @kind other */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1); /* @kind other */
+  --duration-fast: 120ms; /* @kind other */
+  --duration-base: 200ms; /* @kind other */
+  --duration-slow: 360ms; /* @kind other */
+}

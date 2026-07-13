@@ -1,3 +1,9 @@
+@import "./tokens-fonts.css";
+@import "./tokens-colors.css";
+@import "./tokens-typography.css";
+@import "./tokens-spacing.css";
+@import "./tokens-radii.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
