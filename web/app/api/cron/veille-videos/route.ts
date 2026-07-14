@@ -20,12 +20,11 @@ export async function GET(request: NextRequest) {
 
   const { data: channels } = await supabase
     .from("veille_youtube_channels")
-    .select("channel_id, channel_name, active");
-
-  const activeChannels = (channels ?? []).filter((channel: any) => channel.active !== false);
+    .select("channel_id, channel_name")
+    .eq("active", true);
 
   const allCandidates: VideoCandidate[] = [];
-  for (const channel of activeChannels) {
+  for (const channel of channels ?? []) {
     try {
       const videos = await fetchLatestVideosForChannel(channel.channel_id, channel.channel_name);
       allCandidates.push(...videos);

@@ -45,9 +45,11 @@ describe("GET /api/cron/veille-videos", () => {
       },
     ]);
 
+    const channelsEq = vi.fn().mockResolvedValue({ data: [{ channel_id: "c1", channel_name: "Sikarium" }], error: null });
+
     mockFrom.mockImplementation((table: string) => {
       if (table === "veille_youtube_channels") {
-        return { select: vi.fn().mockResolvedValue({ data: [{ channel_id: "c1", channel_name: "Sikarium" }], error: null }) };
+        return { select: vi.fn().mockReturnValue({ eq: channelsEq }) };
       }
       return {
         select: vi.fn().mockResolvedValue({ data: [], error: null }),
@@ -62,5 +64,9 @@ describe("GET /api/cron/veille-videos", () => {
 
     expect(response.status).toBe(200);
     expect(sendVeilleNotification).toHaveBeenCalledTimes(1);
+    // Inactive channels are excluded server-side by Postgres via .eq("active", true) —
+    // there is no JS-side filtering left to unit-test, so we assert the query itself
+    // is scoped correctly rather than re-testing Postgres's WHERE clause.
+    expect(channelsEq).toHaveBeenCalledWith("active", true);
   });
 });
