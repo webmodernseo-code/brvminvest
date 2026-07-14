@@ -39,8 +39,8 @@ describe("GET /api/cron/veille-articles", () => {
   });
 
   it("inserts the first unseen article and sends the notification", async () => {
-    (scrapeListingLinks as any).mockResolvedValue([{ url: "https://sikafinance.com/article-1" }]);
-    (scrapeArticleContent as any).mockResolvedValue({
+    vi.mocked(scrapeListingLinks).mockResolvedValue([{ url: "https://sikafinance.com/article-1" }]);
+    vi.mocked(scrapeArticleContent).mockResolvedValue({
       title: "BRVM en hausse",
       excerpt: "Le marché progresse cette semaine.",
       publishedAt: "2026-07-13T08:00:00Z",

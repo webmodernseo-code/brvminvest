@@ -12,7 +12,6 @@ export function verifyUnsubscribeToken(token: string): string | null {
   try {
     const decoded = Buffer.from(token, "base64url").toString("utf-8");
     const [email, signature] = decoded.split(":");
-    const expected = createUnsubscribeToken(email).split(":")[0];
     return signature && createUnsubscribeToken(email) === token ? email : null;
   } catch {
     return null;

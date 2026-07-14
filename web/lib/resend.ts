@@ -31,7 +31,7 @@ export async function sendVeilleNotification(input: NotificationInput): Promise<
   // Each recipient gets their own unsubscribe token, so one send never affects
   // another subscriber and no email exposes the others' addresses in "to".
   const emails = await Promise.all(
-    subscribers.map(async (subscriber: any) => {
+    subscribers.map(async (subscriber: { email: string }) => {
       const token = createUnsubscribeToken(subscriber.email);
       const html = await render(
         VeilleNotificationEmail({

@@ -26,7 +26,7 @@ export async function GET(request: NextRequest) {
   const supabase = serviceRoleClient();
 
   const { data: existing } = await supabase.from("veille_articles").select("source_url");
-  const knownUrls = new Set((existing ?? []).map((row: any) => row.source_url as string));
+  const knownUrls = new Set((existing ?? []).map((row: { source_url: string }) => row.source_url));
 
   const allCandidates: ArticleCandidate[] = [];
   for (const source of SOURCES) {

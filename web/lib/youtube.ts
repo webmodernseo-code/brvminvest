@@ -2,6 +2,11 @@ import type { VideoCandidate } from "./veille/types";
 
 const YOUTUBE_SEARCH_URL = "https://www.googleapis.com/youtube/v3/search";
 
+interface YoutubeSearchItem {
+  id: { videoId: string };
+  snippet: { title: string; publishedAt: string };
+}
+
 export async function fetchLatestVideosForChannel(
   channelId: string,
   channelName: string
@@ -20,7 +25,7 @@ export async function fetchLatestVideosForChannel(
   }
 
   const json = await response.json();
-  const items = (json.items ?? []) as any[];
+  const items = (json.items ?? []) as YoutubeSearchItem[];
 
   return items.map((item) => ({
     videoId: item.id.videoId,

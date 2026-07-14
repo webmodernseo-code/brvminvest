@@ -35,7 +35,7 @@ describe("GET /api/cron/veille-videos", () => {
   });
 
   it("inserts the most recent unseen video and sends the notification", async () => {
-    (fetchLatestVideosForChannel as any).mockResolvedValue([
+    vi.mocked(fetchLatestVideosForChannel).mockResolvedValue([
       {
         videoId: "vid-1",
         url: "https://youtube.com/watch?v=vid-1",

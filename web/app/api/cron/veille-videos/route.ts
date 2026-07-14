@@ -34,7 +34,7 @@ export async function GET(request: NextRequest) {
   }
 
   const { data: existing } = await supabase.from("veille_videos").select("youtube_video_id");
-  const knownIds = new Set((existing ?? []).map((row: any) => row.youtube_video_id as string));
+  const knownIds = new Set((existing ?? []).map((row: { youtube_video_id: string }) => row.youtube_video_id));
 
   const unseen = filterUnseenVideos(allCandidates, knownIds);
   const picked = pickMostRecentVideo(unseen);
