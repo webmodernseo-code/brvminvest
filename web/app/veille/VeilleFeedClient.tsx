@@ -98,7 +98,7 @@ function FavoritesTab({
         <VideoCard key={video.id} video={video} loggedIn={loggedIn} isFavorited />
       ))}
       {favoritedArticles.length === 0 && favoritedVideos.length === 0 && (
-        <p className="text-center text-text-tertiary">Aucun favori pour l'instant.</p>
+        <p className="text-center text-text-tertiary">Aucun favori pour l&apos;instant.</p>
       )}
     </div>
   );

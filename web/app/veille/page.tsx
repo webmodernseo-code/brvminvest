@@ -23,27 +23,31 @@ export default async function VeillePage() {
       .from("veille_favorites")
       .select("content_id")
       .eq("profile_id", user.id);
-    favoriteIds = new Set((favorites ?? []).map((f: any) => f.content_id as string));
+    favoriteIds = new Set((favorites ?? []).map((f: { content_id: string }) => f.content_id));
   }
 
   return (
     <VeilleFeedClient
       loggedIn={!!user}
       favoriteIds={Array.from(favoriteIds)}
-      articles={(articles ?? []).map((a: any) => ({
-        id: a.id,
-        title: a.title,
-        excerpt: a.excerpt,
-        sourceName: a.source_name,
-        publishedAt: a.published_at,
-      }))}
-      videos={(videos ?? []).map((v: any) => ({
-        id: v.id,
-        title: v.title,
-        youtubeVideoId: v.youtube_video_id,
-        channelName: v.channel_name,
-        publishedAt: v.published_at,
-      }))}
+      articles={(articles ?? []).map(
+        (a: { id: string; title: string; excerpt: string; source_name: string; published_at: string }) => ({
+          id: a.id,
+          title: a.title,
+          excerpt: a.excerpt,
+          sourceName: a.source_name,
+          publishedAt: a.published_at,
+        })
+      )}
+      videos={(videos ?? []).map(
+        (v: { id: string; title: string; youtube_video_id: string; channel_name: string; published_at: string }) => ({
+          id: v.id,
+          title: v.title,
+          youtubeVideoId: v.youtube_video_id,
+          channelName: v.channel_name,
+          publishedAt: v.published_at,
+        })
+      )}
     />
   );
 }

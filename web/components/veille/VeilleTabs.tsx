@@ -1,8 +1,6 @@
 // web/components/veille/VeilleTabs.tsx
 "use client";
 
-import { useState } from "react";
-
 export type VeilleTab = "articles" | "videos" | "favorites";
 
 export function VeilleTabs({

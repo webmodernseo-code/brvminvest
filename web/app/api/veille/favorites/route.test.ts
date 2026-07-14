@@ -1,19 +1,17 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { NextRequest } from "next/server";
 
-var mockGetUser: any;
-var mockFrom: any;
+const { mockGetUser, mockFrom } = vi.hoisted(() => ({
+  mockGetUser: vi.fn(),
+  mockFrom: vi.fn(),
+}));
 
-vi.mock("@/lib/supabase/server", () => {
-  mockGetUser = vi.fn();
-  mockFrom = vi.fn();
-  return {
-    createServerSupabaseClient: vi.fn(async () => ({
-      auth: { getUser: mockGetUser },
-      from: mockFrom,
-    })),
-  };
-});
+vi.mock("@/lib/supabase/server", () => ({
+  createServerSupabaseClient: vi.fn(async () => ({
+    auth: { getUser: mockGetUser },
+    from: mockFrom,
+  })),
+}));
 
 import { POST } from "./route";
 
