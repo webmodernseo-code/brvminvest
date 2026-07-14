@@ -1,6 +1,6 @@
 // web/lib/validation.test.ts
 import { describe, it, expect } from "vitest";
-import { validateSignupForm } from "./validation";
+import { validateSignupForm, validatePassword } from "./validation";
 
 describe("validateSignupForm", () => {
   it("rejects a missing nom", () => {
@@ -25,5 +25,15 @@ describe("validateSignupForm", () => {
     expect(
       validateSignupForm({ nom: "Diop", prenom: "Awa", email: "a@b.com", password: "secret123" })
     ).toBeNull();
+  });
+});
+
+describe("validatePassword", () => {
+  it("rejects a password shorter than 8 characters", () => {
+    expect(validatePassword("short")).toBe("Le mot de passe doit contenir au moins 8 caractères.");
+  });
+
+  it("accepts a password of 8 characters or more", () => {
+    expect(validatePassword("secret123")).toBeNull();
   });
 });
