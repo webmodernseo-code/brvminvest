@@ -15,7 +15,10 @@
       "Bash(./.claude/skills/subagent-driven-development/scripts/review-package 79c8698 HEAD)",
       "Skill(fewer-permission-prompts)",
       "Skill(fewer-permission-prompts:*)",
-      "Bash(node -e ' *)"
+      "Bash(node -e ' *)",
+      "Bash(rm -f /tmp/dev.log)",
+      "Bash(nohup npm run dev)",
+      "Bash(disown)"
     ]
   }
 }
