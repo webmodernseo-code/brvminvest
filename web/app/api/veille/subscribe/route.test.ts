@@ -69,4 +69,24 @@ describe("POST /api/veille/subscribe", () => {
     expect(json.alreadySubscribed).toBe(false);
     expect(updateMock).toHaveBeenCalledWith({ unsubscribed_at: null });
   });
+
+  it("returns 500 if update fails during resubscribe", async () => {
+    const updateMock = vi.fn().mockReturnValue({ eq: vi.fn().mockResolvedValue({ error: "RLS violation" }) });
+    mockFrom.mockReturnValue({
+      select: vi.fn().mockReturnValue({
+        eq: vi.fn().mockResolvedValue({
+          data: [{ email: "resubscribe@example.com", unsubscribed_at: "2026-07-01T10:00:00Z" }],
+          error: null,
+        }),
+      }),
+      update: updateMock,
+      insert: vi.fn(),
+    });
+
+    const response = await POST(makeRequest({ email: "resubscribe@example.com" }));
+    const json = await response.json();
+
+    expect(response.status).toBe(500);
+    expect(json.error).toBe("Inscription impossible.");
+  });
 });

@@ -23,10 +23,13 @@ export async function POST(request: NextRequest) {
 
     // If unsubscribed_at is not null, this is a resubscribe request
     if (row.unsubscribed_at !== null) {
-      await supabase
+      const { error } = await supabase
         .from("veille_subscribers")
         .update({ unsubscribed_at: null })
         .eq("email", email);
+      if (error) {
+        return NextResponse.json({ error: "Inscription impossible." }, { status: 500 });
+      }
       return NextResponse.json({ alreadySubscribed: false }, { status: 200 });
     }
 
