@@ -1,5 +1,5 @@
-// web/lib/resend.ts
-import { Resend } from "resend";
+// web/lib/mailer.ts
+import nodemailer from "nodemailer";
 import { createClient } from "@supabase/supabase-js";
 import { render } from "@react-email/render";
 import { VeilleNotificationEmail } from "@/emails/VeilleNotification";
@@ -24,13 +24,23 @@ export async function sendVeilleNotification(input: NotificationInput): Promise<
     return;
   }
 
-  const resend = new Resend(process.env.RESEND_API_KEY!);
+  const transporter = nodemailer.createTransport({
+    host: process.env.SMTP_HOST!,
+    port: Number(process.env.SMTP_PORT!),
+    secure: true,
+    auth: {
+      user: process.env.SMTP_USER!,
+      pass: process.env.SMTP_PASSWORD!,
+    },
+  });
+
   const label = input.type === "article" ? "Nouvel article" : "Nouvelle vidéo";
   const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
 
-  // Each recipient gets their own unsubscribe token, so one send never affects
-  // another subscriber and no email exposes the others' addresses in "to".
-  const emails = await Promise.all(
+  // Each recipient gets their own unsubscribe token and its own send, so one
+  // failure never affects another subscriber and no email exposes the
+  // others' addresses in "to".
+  await Promise.all(
     subscribers.map(async (subscriber: { email: string }) => {
       const token = createUnsubscribeToken(subscriber.email);
       const html = await render(
@@ -41,14 +51,12 @@ export async function sendVeilleNotification(input: NotificationInput): Promise<
           unsubscribeUrl: `${appUrl}/veille/unsubscribe?token=${token}`,
         })
       );
-      return {
-        from: "Veille.BRVM <veille@brvm-app.com>",
-        to: [subscriber.email as string],
+      return transporter.sendMail({
+        from: process.env.SMTP_FROM!,
+        to: subscriber.email,
         subject: `${label} Veille.BRVM : ${input.title}`,
         html,
-      };
+      });
     })
   );
-
-  await resend.batch.send(emails);
 }

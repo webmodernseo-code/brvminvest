@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import { scrapeListingLinks, scrapeArticleContent } from "@/lib/firecrawl";
 import { filterUnseenCandidates, pickMostRecentCandidate } from "@/lib/veille/articleSelection";
-import { sendVeilleNotification } from "@/lib/resend";
+import { sendVeilleNotification } from "@/lib/mailer";
 import type { ArticleCandidate } from "@/lib/veille/types";
 
 const SOURCES: { name: string; listingUrl: string }[] = [

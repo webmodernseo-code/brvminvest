@@ -9,12 +9,12 @@ vi.mock("@supabase/supabase-js", () => ({
 vi.mock("@/lib/youtube", () => ({
   fetchLatestVideosForChannel: vi.fn(),
 }));
-vi.mock("@/lib/resend", () => ({
+vi.mock("@/lib/mailer", () => ({
   sendVeilleNotification: vi.fn().mockResolvedValue(undefined),
 }));
 
 import { fetchLatestVideosForChannel } from "@/lib/youtube";
-import { sendVeilleNotification } from "@/lib/resend";
+import { sendVeilleNotification } from "@/lib/mailer";
 import { GET } from "./route";
 
 function makeRequest(secret: string) {

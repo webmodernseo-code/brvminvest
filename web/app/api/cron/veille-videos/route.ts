@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import { fetchLatestVideosForChannel } from "@/lib/youtube";
 import { filterUnseenVideos, pickMostRecentVideo } from "@/lib/veille/videoSelection";
-import { sendVeilleNotification } from "@/lib/resend";
+import { sendVeilleNotification } from "@/lib/mailer";
 import type { VideoCandidate } from "@/lib/veille/types";
 
 function serviceRoleClient() {

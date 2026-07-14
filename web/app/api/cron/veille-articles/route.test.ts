@@ -13,12 +13,12 @@ vi.mock("@/lib/firecrawl", () => ({
   scrapeListingLinks: vi.fn(),
   scrapeArticleContent: vi.fn(),
 }));
-vi.mock("@/lib/resend", () => ({
+vi.mock("@/lib/mailer", () => ({
   sendVeilleNotification: vi.fn().mockResolvedValue(undefined),
 }));
 
 import { scrapeListingLinks, scrapeArticleContent } from "@/lib/firecrawl";
-import { sendVeilleNotification } from "@/lib/resend";
+import { sendVeilleNotification } from "@/lib/mailer";
 import { GET } from "./route";
 
 function makeRequest(secret: string) {

@@ -1,29 +1,30 @@
-// web/lib/resend.test.ts
+// web/lib/mailer.test.ts
 import { describe, it, expect, vi, beforeEach } from "vitest";
 
 const mockFrom = vi.fn();
-const mockSend = vi.fn().mockResolvedValue({ data: [{ id: "email-1" }], error: null });
+const mockSendMail = vi.fn().mockResolvedValue({ messageId: "email-1" });
+const mockCreateTransport = vi.fn().mockReturnValue({ sendMail: mockSendMail });
 
-vi.mock("resend", () => ({
-  // A regular `function` (not an arrow function) is required here: the real
-  // implementation calls `new Resend(...)`, and arrow functions have no
-  // [[Construct]] internal method, so `new` on an arrow-function
-  // implementation always throws "is not a constructor".
-  Resend: vi.fn().mockImplementation(function () {
-    return { batch: { send: mockSend } };
-  }),
+vi.mock("nodemailer", () => ({
+  default: { createTransport: (...args: unknown[]) => mockCreateTransport(...args) },
 }));
 
 vi.mock("@supabase/supabase-js", () => ({
   createClient: () => ({ from: mockFrom }),
 }));
 
-import { sendVeilleNotification } from "./resend";
+import { sendVeilleNotification } from "./mailer";
 
 describe("sendVeilleNotification", () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    mockCreateTransport.mockReturnValue({ sendMail: mockSendMail });
     process.env.UNSUBSCRIBE_SECRET = "test-secret";
+    process.env.SMTP_HOST = "foulque.o2switch.net";
+    process.env.SMTP_PORT = "465";
+    process.env.SMTP_USER = "veille@brvminvest.webmodernseo.co";
+    process.env.SMTP_PASSWORD = "test-password";
+    process.env.SMTP_FROM = "veille@brvminvest.webmodernseo.co";
     // Mirrors the real @supabase/supabase-js chain: .from().select().is()
     // resolves at the end of the chain, so `select` must return an object
     // exposing `.is` rather than resolving immediately.
@@ -37,7 +38,7 @@ describe("sendVeilleNotification", () => {
     });
   });
 
-  it("sends one personalized email per active subscriber via batch", async () => {
+  it("sends one personalized email per active subscriber over SMTP", async () => {
     await sendVeilleNotification({
       type: "article",
       title: "BRVM en hausse",
@@ -45,14 +46,13 @@ describe("sendVeilleNotification", () => {
       url: "https://example.com/article",
     });
 
-    expect(mockSend).toHaveBeenCalledTimes(1);
-    const batch = mockSend.mock.calls[0][0];
-    expect(batch).toHaveLength(2);
-    expect(batch[0].to).toEqual(["a@b.com"]);
-    expect(batch[1].to).toEqual(["c@d.com"]);
-    expect(batch[0].subject).toContain("BRVM en hausse");
+    expect(mockSendMail).toHaveBeenCalledTimes(2);
+    const [firstCall, secondCall] = mockSendMail.mock.calls.map((call) => call[0]);
+    expect(firstCall.to).toEqual("a@b.com");
+    expect(secondCall.to).toEqual("c@d.com");
+    expect(firstCall.subject).toContain("BRVM en hausse");
     // Each recipient gets a distinct unsubscribe link tied to their own email.
-    expect(batch[0].html).not.toEqual(batch[1].html);
+    expect(firstCall.html).not.toEqual(secondCall.html);
   });
 
   it("does nothing when there are no active subscribers", async () => {
@@ -67,6 +67,7 @@ describe("sendVeilleNotification", () => {
       url: "https://youtube.com/watch?v=1",
     });
 
-    expect(mockSend).not.toHaveBeenCalled();
+    expect(mockSendMail).not.toHaveBeenCalled();
+    expect(mockCreateTransport).not.toHaveBeenCalled();
   });
 });
