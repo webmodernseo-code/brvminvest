@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { createBrowserSupabaseClient } from "@/lib/supabase/client";
 import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
+import { BackHomeLink } from "@/components/ui/BackHomeLink";
 
 function LoginForm() {
   const router = useRouter();
@@ -34,6 +35,7 @@ function LoginForm() {
 
   return (
     <div className="mx-auto flex min-h-screen max-w-sm flex-col justify-center gap-4 p-6">
+      <BackHomeLink />
       <h1 className="font-display text-2xl font-extrabold uppercase text-text-primary">
         Se connecter
       </h1>

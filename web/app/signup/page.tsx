@@ -6,6 +6,7 @@ import { createBrowserSupabaseClient } from "@/lib/supabase/client";
 import { validateSignupForm } from "@/lib/validation";
 import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
+import { BackHomeLink } from "@/components/ui/BackHomeLink";
 
 export default function SignupPage() {
   const router = useRouter();
@@ -49,6 +50,7 @@ export default function SignupPage() {
 
   return (
     <div className="mx-auto flex min-h-screen max-w-sm flex-col justify-center gap-4 p-6">
+      <BackHomeLink />
       <h1 className="font-display text-2xl font-extrabold uppercase text-text-primary">
         Créer un compte
       </h1>

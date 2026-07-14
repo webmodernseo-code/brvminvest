@@ -3,6 +3,7 @@
 
 import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import { BackHomeLink } from "@/components/ui/BackHomeLink";
 
 function UnsubscribeStatus() {
   const searchParams = useSearchParams();
@@ -34,6 +35,7 @@ function UnsubscribeStatus() {
 export default function UnsubscribePage() {
   return (
     <div className="mx-auto flex min-h-screen max-w-sm flex-col items-center justify-center gap-2 p-6 text-center">
+      <BackHomeLink />
       <Suspense fallback={<p>Désabonnement en cours...</p>}>
         <UnsubscribeStatus />
       </Suspense>

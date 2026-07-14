@@ -5,6 +5,7 @@ import { VeilleTabs, type VeilleTab } from "@/components/veille/VeilleTabs";
 import { ArticleCard, type ArticleCardData } from "@/components/veille/ArticleCard";
 import { VideoCard, type VideoCardData } from "@/components/veille/VideoCard";
 import { SubscribeForm } from "@/components/veille/SubscribeForm";
+import { BackHomeLink } from "@/components/ui/BackHomeLink";
 import Link from "next/link";
 
 export function VeilleFeedClient({
@@ -23,6 +24,7 @@ export function VeilleFeedClient({
 
   return (
     <div className="mx-auto flex max-w-2xl flex-col gap-4 p-6">
+      <BackHomeLink />
       <h1 className="font-display text-2xl font-extrabold uppercase text-text-primary">
         Veille.BRVM
       </h1>
