@@ -13,9 +13,24 @@ export async function POST(request: NextRequest) {
   }
 
   const supabase = serviceRoleClient();
-  const { data: existing } = await supabase.from("veille_subscribers").select("email").eq("email", email);
+  const { data: existing } = await supabase
+    .from("veille_subscribers")
+    .select("email, unsubscribed_at")
+    .eq("email", email);
 
   if (existing && existing.length > 0) {
+    const row = existing[0] as { email: string; unsubscribed_at: string | null };
+
+    // If unsubscribed_at is not null, this is a resubscribe request
+    if (row.unsubscribed_at !== null) {
+      await supabase
+        .from("veille_subscribers")
+        .update({ unsubscribed_at: null })
+        .eq("email", email);
+      return NextResponse.json({ alreadySubscribed: false }, { status: 200 });
+    }
+
+    // Otherwise, it's a genuine duplicate
     return NextResponse.json({ alreadySubscribed: true }, { status: 200 });
   }
 
