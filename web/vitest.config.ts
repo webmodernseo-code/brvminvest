@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import { defineConfig, type Plugin } from "vitest/config";
+import react from "@vitejs/plugin-react";
 
 /**
  * Resolves the "@/*" path alias (declared in tsconfig.json) to real files on
@@ -38,5 +39,8 @@ function atAliasResolver(): Plugin {
 }
 
 export default defineConfig({
-  plugins: [atAliasResolver()],
+  // react() transforms JSX/TSX via Babel regardless of tsconfig's
+  // `jsx: "preserve"` setting (which esbuild's default transform respects,
+  // leaving raw JSX untouched and breaking Vitest's import analysis).
+  plugins: [atAliasResolver(), react()],
 });
