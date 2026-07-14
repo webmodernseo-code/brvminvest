@@ -72,4 +72,61 @@ describe("POST /api/veille/favorites", () => {
     expect(response.status).toBe(200);
     expect(json.favorited).toBe(false);
   });
+
+  it("returns 500 when select query fails", async () => {
+    mockGetUser.mockResolvedValue({ data: { user: { id: "user-1" } } });
+    mockFrom.mockReturnValue({
+      select: vi.fn().mockReturnValue({
+        eq: vi.fn().mockReturnValue({
+          eq: vi.fn().mockReturnValue({
+            eq: vi.fn().mockResolvedValue({ data: null, error: { message: "RLS violation" } }),
+          }),
+        }),
+      }),
+    });
+
+    const response = await POST(makeRequest({ contentType: "article", contentId: "a1" }));
+    const json = await response.json();
+
+    expect(response.status).toBe(500);
+    expect(json.error).toBeDefined();
+  });
+
+  it("returns 500 when insert fails", async () => {
+    mockGetUser.mockResolvedValue({ data: { user: { id: "user-1" } } });
+    mockFrom.mockReturnValue({
+      select: vi.fn().mockReturnValue({
+        eq: vi.fn().mockReturnValue({
+          eq: vi.fn().mockReturnValue({ eq: vi.fn().mockResolvedValue({ data: [], error: null }) }),
+        }),
+      }),
+      insert: vi.fn().mockResolvedValue({ error: { message: "Database error" } }),
+    });
+
+    const response = await POST(makeRequest({ contentType: "article", contentId: "a1" }));
+    const json = await response.json();
+
+    expect(response.status).toBe(500);
+    expect(json.error).toBeDefined();
+  });
+
+  it("returns 500 when delete fails", async () => {
+    mockGetUser.mockResolvedValue({ data: { user: { id: "user-1" } } });
+    mockFrom.mockReturnValue({
+      select: vi.fn().mockReturnValue({
+        eq: vi.fn().mockReturnValue({
+          eq: vi.fn().mockReturnValue({
+            eq: vi.fn().mockResolvedValue({ data: [{ id: "fav-1" }], error: null }),
+          }),
+        }),
+      }),
+      delete: vi.fn().mockReturnValue({ eq: vi.fn().mockResolvedValue({ error: { message: "Delete failed" } }) }),
+    });
+
+    const response = await POST(makeRequest({ contentType: "article", contentId: "a1" }));
+    const json = await response.json();
+
+    expect(response.status).toBe(500);
+    expect(json.error).toBeDefined();
+  });
 });

@@ -31,15 +31,20 @@ export function FavoriteButton({
     setFavorited(!previous);
     setPending(true);
 
-    const response = await fetch("/api/veille/favorites", {
-      method: "POST",
-      body: JSON.stringify({ contentType, contentId }),
-    });
+    try {
+      const response = await fetch("/api/veille/favorites", {
+        method: "POST",
+        body: JSON.stringify({ contentType, contentId }),
+      });
 
-    if (!response.ok) {
+      if (!response.ok) {
+        setFavorited(previous);
+      }
+    } catch {
       setFavorited(previous);
+    } finally {
+      setPending(false);
     }
-    setPending(false);
   }
 
   return (
