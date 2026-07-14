@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { BottomNav } from "@/components/ui/BottomNav";
 
 export const metadata: Metadata = {
   title: "Investir à la BRVM",
@@ -9,7 +10,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="fr">
-      <body className="bg-surface-app font-body text-text-primary">{children}</body>
+      <body className="bg-surface-app font-body text-text-primary">
+        {children}
+        <BottomNav />
+      </body>
     </html>
   );
 }
