@@ -18,7 +18,7 @@ function chainable(result: { data: unknown; error?: unknown }) {
   return builder;
 }
 
-const mockFrom = vi.fn((_table: string) => chainable({ data: [] }));
+const mockFrom = vi.fn();
 
 vi.mock("@supabase/supabase-js", () => ({
   createClient: () => ({ from: mockFrom }),
