@@ -13,7 +13,7 @@ function chainable(result: { data: unknown; error?: unknown }) {
   return builder;
 }
 
-const mockFrom = vi.fn((_table: string) => chainable({ data: [] }));
+const mockFrom = vi.fn(() => chainable({ data: [] }));
 
 vi.mock("@supabase/supabase-js", () => ({
   createClient: () => ({ from: mockFrom }),
@@ -38,7 +38,7 @@ function makeRequest(secret: string) {
 describe("GET /api/cron/divialerte", () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    mockFrom.mockImplementation((_table: string) => chainable({ data: [] }));
+    mockFrom.mockImplementation(() => chainable({ data: [] }));
     process.env.CRON_SECRET = "test-secret";
   });
 
