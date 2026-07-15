@@ -11,13 +11,17 @@ export async function fetchLatestVideosForChannel(
   channelId: string,
   channelName: string
 ): Promise<VideoCandidate[]> {
+  // `order=date` combined with `type=video` triggers a spurious 403
+  // ("accountDelegationForbidden") from the YouTube Data API — each works
+  // fine alone. We drop `order` and rely on the caller (pickMostRecentVideo)
+  // to sort by publishedAt, with a higher maxResults to compensate for the
+  // default relevance ordering.
   const url = new URL(YOUTUBE_SEARCH_URL);
   url.searchParams.set("key", process.env.YOUTUBE_API_KEY!);
   url.searchParams.set("channelId", channelId);
   url.searchParams.set("part", "snippet");
-  url.searchParams.set("order", "date");
   url.searchParams.set("type", "video");
-  url.searchParams.set("maxResults", "5");
+  url.searchParams.set("maxResults", "10");
 
   const response = await fetch(url.toString());
   if (!response.ok) {
