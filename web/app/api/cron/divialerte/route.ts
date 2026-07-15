@@ -38,6 +38,11 @@ export async function GET(request: NextRequest) {
     .select("id, name, ticker, country");
   const companies: CompanyRecord[] = existingCompanies ?? [];
 
+  const dividendGroups = new Map<
+    string,
+    { company: CompanyRecord; exerciceYear: number; sika: DividendRow | null; richbourse: DividendRow | null }
+  >();
+
   for (const row of scraped) {
     let company = matchCompany({ ticker: row.ticker, companyName: row.companyName }, companies);
 
@@ -64,6 +69,26 @@ export async function GET(request: NextRequest) {
     }
 
     const exerciceYear = deriveExerciceYear(row.dateDetachement);
+    const key = `${company.id}:${exerciceYear}`;
+    const existingGroup = dividendGroups.get(key);
+    if (existingGroup) {
+      if (row.sourceName === "Sika Finance") {
+        existingGroup.sika = row;
+      } else {
+        existingGroup.richbourse = row;
+      }
+    } else {
+      dividendGroups.set(key, {
+        company,
+        exerciceYear,
+        sika: row.sourceName === "Sika Finance" ? row : null,
+        richbourse: row.sourceName === "RichBourse" ? row : null,
+      });
+    }
+  }
+
+  for (const group of Array.from(dividendGroups.values())) {
+    const { company, exerciceYear, sika, richbourse } = group;
 
     const { data: existingDividend } = await supabase
       .from("divialerte_dividends")
@@ -80,9 +105,7 @@ export async function GET(request: NextRequest) {
           datePaiement: existingDividend.date_paiement,
         }
       : null;
-    const sikaFields = row.sourceName === "Sika Finance" ? row : null;
-    const richbourseFields = row.sourceName === "RichBourse" ? row : null;
-    const resolved = resolveDividendFields(currentFields, sikaFields, richbourseFields);
+    const resolved = resolveDividendFields(currentFields, sika, richbourse);
 
     const { error: upsertDividendError } = await supabase.from("divialerte_dividends").upsert(
       {

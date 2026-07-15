@@ -1,6 +1,8 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { NextRequest } from "next/server";
 
+let upsertCalls: { payload: unknown; options: unknown }[] = [];
+
 function chainable(result: { data: unknown; error?: unknown }) {
   const builder: Record<string, unknown> = {};
   builder.select = () => builder;
@@ -8,12 +10,15 @@ function chainable(result: { data: unknown; error?: unknown }) {
   builder.order = () => builder;
   builder.maybeSingle = () => Promise.resolve(result);
   builder.insert = () => builder;
-  builder.upsert = () => Promise.resolve(result);
+  builder.upsert = (payload: unknown, options?: unknown) => {
+    upsertCalls.push({ payload, options });
+    return Promise.resolve(result);
+  };
   builder.then = (resolve: (value: unknown) => void) => resolve(result);
   return builder;
 }
 
-const mockFrom = vi.fn(() => chainable({ data: [] }));
+const mockFrom = vi.fn((_table: string) => chainable({ data: [] }));
 
 vi.mock("@supabase/supabase-js", () => ({
   createClient: () => ({ from: mockFrom }),
@@ -39,6 +44,7 @@ describe("GET /api/cron/divialerte", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     mockFrom.mockImplementation(() => chainable({ data: [] }));
+    upsertCalls = [];
     process.env.CRON_SECRET = "test-secret";
   });
 
@@ -63,5 +69,51 @@ describe("GET /api/cron/divialerte", () => {
     const response = await GET(makeRequest("test-secret"));
 
     expect(response.status).toBe(200);
+  });
+
+  it("keeps Sika's montant when both sources report the same company/year", async () => {
+    const company = { id: "company-1", name: "Societe Test", ticker: "STEST", country: "CI" };
+
+    mockFrom.mockImplementation((table: string) => {
+      if (table === "divialerte_companies") {
+        return chainable({ data: [company] });
+      }
+      if (table === "divialerte_dividends") {
+        return chainable({ data: null });
+      }
+      return chainable({ data: [] });
+    });
+
+    vi.mocked(scrapeSikaDividends).mockResolvedValue([
+      {
+        companyName: "Societe Test",
+        ticker: "STEST",
+        country: "CI",
+        montant: 100,
+        rendement: 5,
+        dateDetachement: "2026-07-10",
+        datePaiement: "2026-07-15",
+        sourceName: "Sika Finance",
+      },
+    ]);
+    vi.mocked(scrapeRichBourseDividends).mockResolvedValue([
+      {
+        companyName: "Societe Test",
+        ticker: "STEST",
+        country: "CI",
+        montant: 200,
+        rendement: 6,
+        dateDetachement: "2026-07-12",
+        datePaiement: "2026-07-20",
+        sourceName: "RichBourse",
+      },
+    ]);
+
+    const response = await GET(makeRequest("test-secret"));
+    expect(response.status).toBe(200);
+
+    expect(upsertCalls.length).toBeGreaterThan(0);
+    const lastUpsert = upsertCalls[upsertCalls.length - 1].payload as { montant: number | null };
+    expect(lastUpsert.montant).toBe(100);
   });
 });
