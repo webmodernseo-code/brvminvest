@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { determineAlertsToSend } from "./alertLogic";
+import { determineAlertsToSend, type AlertType } from "./alertLogic";
 
 describe("determineAlertsToSend", () => {
   it("returns nothing when the date is unknown", () => {
@@ -23,10 +23,10 @@ describe("determineAlertsToSend", () => {
   });
 
   it("skips j3 when it was already sent", () => {
-    expect(determineAlertsToSend(1, new Set(["j3"]))).toEqual(["j1"]);
+    expect(determineAlertsToSend(1, new Set<AlertType>(["j3"]))).toEqual(["j1"]);
   });
 
   it("returns nothing when both were already sent", () => {
-    expect(determineAlertsToSend(0, new Set(["j3", "j1"]))).toEqual([]);
+    expect(determineAlertsToSend(0, new Set<AlertType>(["j3", "j1"]))).toEqual([]);
   });
 });
