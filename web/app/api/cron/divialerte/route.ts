@@ -42,15 +42,24 @@ export async function GET(request: NextRequest) {
     let company = matchCompany({ ticker: row.ticker, companyName: row.companyName }, companies);
 
     if (!company) {
-      const { data: created } = await supabase
+      const { data: created, error: createCompanyError } = await supabase
         .from("divialerte_companies")
         .insert({ name: row.companyName, ticker: row.ticker, country: row.country })
         .select();
+      if (createCompanyError) {
+        console.error("[divialerte] company insert failed", createCompanyError);
+      }
       if (!created?.[0]) continue;
       company = created[0] as CompanyRecord;
       companies.push(company);
     } else if (!company.country && row.country) {
-      await supabase.from("divialerte_companies").update({ country: row.country }).eq("id", company.id);
+      const { error: updateCompanyError } = await supabase
+        .from("divialerte_companies")
+        .update({ country: row.country })
+        .eq("id", company.id);
+      if (updateCompanyError) {
+        console.error("[divialerte] company country update failed", updateCompanyError);
+      }
       company.country = row.country;
     }
 
@@ -75,7 +84,7 @@ export async function GET(request: NextRequest) {
     const richbourseFields = row.sourceName === "RichBourse" ? row : null;
     const resolved = resolveDividendFields(currentFields, sikaFields, richbourseFields);
 
-    await supabase.from("divialerte_dividends").upsert(
+    const { error: upsertDividendError } = await supabase.from("divialerte_dividends").upsert(
       {
         id: existingDividend?.id,
         company_id: company.id,
@@ -88,6 +97,9 @@ export async function GET(request: NextRequest) {
       },
       { onConflict: "company_id,exercice_year" }
     );
+    if (upsertDividendError) {
+      console.error("[divialerte] dividend upsert failed", upsertDividendError);
+    }
   }
 
   const { data: watchlist } = await supabase
@@ -145,11 +157,14 @@ export async function GET(request: NextRequest) {
           datePaiement: dividend.date_paiement,
           daysLeft,
         });
-        await supabase.from("divialerte_alerts_sent").insert({
+        const { error: insertAlertSentError } = await supabase.from("divialerte_alerts_sent").insert({
           profile_id: entry.profile_id,
           dividend_id: dividend.id,
           alert_type: alertType,
         });
+        if (insertAlertSentError) {
+          console.error("[divialerte] alerts_sent insert failed", insertAlertSentError);
+        }
       } catch (err) {
         console.error(`[divialerte] alert email failed for ${entry.profile_id}`, err);
       }
