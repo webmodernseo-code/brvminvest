@@ -1,6 +1,7 @@
 {
   "crons": [
     { "path": "/api/cron/veille-articles", "schedule": "0 8 * * 1,4" },
-    { "path": "/api/cron/veille-videos", "schedule": "0 8 * * 2,5" }
+    { "path": "/api/cron/veille-videos", "schedule": "0 8 * * 2,5" },
+    { "path": "/api/cron/divialerte", "schedule": "0 7 * * *" }
   ]
 }
